@@ -1,0 +1,19 @@
+{
+  "name": "css-import-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/auaicn/css-import-generator.git"
+  },
+  "author": "Kyungho, Park <dev.kyungho@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/auaicn/css-import-generator/issues"
+  },
+  "homepage": "https://github.com/auaicn/css-import-generator#readme"
+}
