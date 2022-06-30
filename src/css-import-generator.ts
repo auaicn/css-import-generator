@@ -19,7 +19,7 @@ console.log(packageInfo);
 console.log(packageInfo["css-root-path"]);
 
 const newLine = "\n";
-const extensions = new Set(["css", "scss"]);
+const extensions = new Set(["css", "scss", "sass"]);
 
 /**
  * css import 문을 가지고 있는 index.js 라는 파일을 생성한다.

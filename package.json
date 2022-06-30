@@ -1,12 +1,17 @@
 {
   "name": "css-import-generator",
   "author": "Kyungho, Park <dev.kyungho@gmail.com>",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "ISC",
-  "description": "",
+  "description": "make single .js file with structured-import-statements of all css/scss/sass file under given root path",
+  "keywords": [
+    "css",
+    "scss",
+    "node"
+  ],
   "type": "module",
-  "main": "index.js",
-  "bin": "css-import-generator",
+  "main": "src/css-import-generator",
+  "bin": "src/css-import-generator",
   "man": "./man/doc.1",
   "engines": {
     "node": ">=v16.14.2"
