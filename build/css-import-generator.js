@@ -1,10 +1,29 @@
 #!/usr/bin/env node
 import finder from "find-package-json";
 import { readdirSync, writeFile } from "fs";
-import * as path from "path";
+import * as path from "path/posix";
+import { exit } from "process";
 const packageInfo = finder().next().value;
+if (packageInfo === undefined) {
+    console.log("failed to get package information. Did you call within project directory?");
+    exit();
+}
 console.log(packageInfo);
 console.log(packageInfo["css-root-path"]);
+const config = packageInfo["css-import-generator"];
+if (config === undefined) {
+    console.log('please provide value for "css-import-generator" in package.json field');
+    exit();
+}
+const cssRoot = config["css-root"];
+if (cssRoot === undefined) {
+    console.log('please provide value for "css-root" under "css-import-generator" field of "package.json". It\'s necessary');
+    exit();
+}
+const destination = config["destination"] ?? path.resolve(cssRoot, "index.js");
+if (destination) {
+    console.log(`index.js file that contains all css-importing statement will be generated at "${destination}"\nyou can override this behavior by providing value for "destination" under "css-import-generator" field of "package.json" `);
+}
 const newLine = "\n";
 const extensions = new Set(["css", "scss", "sass"]);
 /**
@@ -13,7 +32,6 @@ const extensions = new Set(["css", "scss", "sass"]);
  * css root directory 위치는 package.json 파일의 "css-root-path" 를 통해 지정할 수 있다.
  * index.js 파일은 css root directory 에 위치한다.
  */
-const cssRootDirectory = process.env.npm_package_css_root_path;
 let content = "";
 const makeEmptyLine = () => {
     return newLine;
@@ -47,11 +65,10 @@ const generateImport = ({ root, currentDirectory }) => {
         });
     });
 };
-if (cssRootDirectory) {
-    generateImport({ root: cssRootDirectory, currentDirectory: cssRootDirectory });
-    writeFile(path.resolve(cssRootDirectory, "index.js"), content, (err) => {
-        if (err) {
-            console.error(err);
-        }
-    });
-}
+// main-logic
+generateImport({ root: cssRoot, currentDirectory: cssRoot });
+writeFile(path.resolve(cssRoot, "index.js"), content, (err) => {
+    if (err) {
+        console.error(err);
+    }
+});
