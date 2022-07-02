@@ -1,7 +1,7 @@
 {
   "name": "css-import-generator",
   "author": "Kyungho, Park <dev.kyungho@gmail.com>",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "ISC",
   "description": "make single .js file with structured-import-statements of all css/scss/sass file under given root path",
   "keywords": [
