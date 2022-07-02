@@ -46,4 +46,4 @@ Below file is auto-generated. I'm using it for big project 😀
 
 ## Further Requirements?
 
-If you need any extra functionality, please contact me > dev.kyung@gmail.com
+If you need any extra functionality, please contact me > dev.kyungho@gmail.com
