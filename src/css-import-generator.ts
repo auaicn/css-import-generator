@@ -12,9 +12,6 @@ if (packageInfo === undefined) {
   exit();
 }
 
-console.log(packageInfo);
-console.log(packageInfo["css-root-path"]);
-
 const config = packageInfo["css-import-generator"];
 
 if (config === undefined) {
@@ -99,3 +96,6 @@ writeFile(path.resolve(cssRoot, "index.js"), content, (err) => {
     console.error(err);
   }
 });
+
+console.log("\n");
+console.log(`successfully generated  css-import-statement containing single-js file at ${destination}`);

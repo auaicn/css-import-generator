@@ -8,8 +8,6 @@ if (packageInfo === undefined) {
     console.log("failed to get package information. Did you call within project directory?");
     exit();
 }
-console.log(packageInfo);
-console.log(packageInfo["css-root-path"]);
 const config = packageInfo["css-import-generator"];
 if (config === undefined) {
     console.log('please provide value for "css-import-generator" in package.json field');
@@ -72,3 +70,5 @@ writeFile(path.resolve(cssRoot, "index.js"), content, (err) => {
         console.error(err);
     }
 });
+console.log("\n");
+console.log(`successfully generated  css-import-statement containing single-js file at ${destination}`);

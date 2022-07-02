@@ -8,5 +8,5 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": false
   },
-  "include": ["./src/**/*"]
+  "include": ["npm_install_test/src/**/*"]
 }
