@@ -1,26 +1,42 @@
+> It has no use if you're keeping your css file with related component in same directory
+
+But we often keep all css-files under some `css-root` directory.
+In that case, this executable receives that path and
+
+1. scans every `scss`, `css`, `sass` files
+2. generates single file at `destination` which contains all import statements.
+   It's available for both Windows(win32) and MacOS(Posix) environment
+
 ### How To Use
 
-add below to package.json
+1. First, Install the package
 
-```json
-"css-import-generator": {
-  "css-root":"src/styles/css",
-  "destination":"src/css-imports.js", // It's optional but default path is src/styles/css/index.js
-}
-```
+   ```shell
+   yarn add css-import-generator
+   # or
+   npm i css-import-generator
+   ```
 
-and run (at project root)
+2. add below to package.json
 
-```
-npx css-import-generator
-```
+   ```json
+   "css-import-generator": {
+     "css-root":"src/styles/css",
+     "destination":"src/css-imports.js",
+   }
+   ```
 
-### What It does
+   `css-root` is necessary. If not given, it won't work.
+   `destination` field is optional. If not given, generated file will be at under `{css-root}/index.js`
 
-given `css-root`, it scans every scss, css, sass file and generated single file at `destination` which contains all import statements.
+3. and below code **at project root path**
 
-If `destination` is not given, It generates js file under `{given css-root}/index.js`
-
-- Available for both Windows/MacOS
+   ```
+   npx css-import-generator
+   ```
 
 ### ScreenShots
+
+I'm using it for big project 😀
+
+![result-screenshot](./docs/result-screenshot.png)
