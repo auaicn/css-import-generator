@@ -8,22 +8,22 @@ import { exit } from "process";
 const packageInfo = finder().next().value;
 
 if (packageInfo === undefined) {
-  console.log("failed to get package information. Did you call within project directory?");
+  console.error("Failed to get package information. Are you in project directory root-path?");
   exit();
 }
 
 const config = packageInfo["css-import-generator"];
 
 if (config === undefined) {
-  console.log('please provide value for "css-import-generator" in package.json field');
+  console.error('Please provide value for "css-import-generator" in package.json field');
   exit();
 }
 
 const cssRoot = config["css-root"];
 
 if (cssRoot === undefined) {
-  console.log(
-    'please provide value for "css-root" under "css-import-generator" field of "package.json". It\'s necessary',
+  console.error(
+    'Please provide value for "css-root" under "css-import-generator" field of "package.json". It\'s necessary',
   );
   exit();
 }
@@ -31,8 +31,8 @@ if (cssRoot === undefined) {
 const destination = config["destination"] ?? path.resolve(cssRoot, "index.js");
 
 if (destination) {
-  console.log(
-    `index.js file that contains all css-importing statement will be generated at "${destination}"\nyou can override this behavior by providing value for "destination" under "css-import-generator" field of "package.json" `,
+  console.warn(
+    `"destination" field is missing. It's okay but we will generate output js file at ${destination}\nyou can override this behavior by providing value for "destination" under "css-import-generator" field of "package.json"`,
   );
 }
 
@@ -40,12 +40,8 @@ const newLine = "\n";
 const extensions = new Set(["css", "scss", "sass"]);
 
 /**
- * css import 문을 가지고 있는 index.js 라는 파일을 생성한다.
- *
- * css root directory 위치는 package.json 파일의 "css-root-path" 를 통해 지정할 수 있다.
- * index.js 파일은 css root directory 에 위치한다.
+ * content to write into {destination}
  */
-
 let content = "";
 
 const makeEmptyLine = () => {
@@ -91,11 +87,11 @@ const generateImport = ({ root, currentDirectory }: { root: string; currentDirec
 // main-logic
 generateImport({ root: cssRoot, currentDirectory: cssRoot });
 
-writeFile(path.resolve(cssRoot, "index.js"), content, (err) => {
+writeFile(destination, content, (err) => {
   if (err) {
     console.error(err);
   }
 });
 
 console.log("\n");
-console.log(`successfully generated  css-import-statement containing single-js file at ${destination}`);
+console.log(`successfully generated "${destination}"`);

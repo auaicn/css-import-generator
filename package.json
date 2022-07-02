@@ -1,7 +1,7 @@
 {
   "name": "css-import-generator",
   "author": "Kyungho, Park <dev.kyungho@gmail.com>",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "license": "ISC",
   "description": "make single .js file with structured-import-statements of all css/scss/sass file under given root path",
   "keywords": [
@@ -31,8 +31,7 @@
     "url": "https://github.com/auaicn/css-import-generator/issues"
   },
   "scripts": {
-    "type-check": "npx tsc",
-    "generate": "node build/css-import-generator.js"
+    "type": "npx tsc"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
