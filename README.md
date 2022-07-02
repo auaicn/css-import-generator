@@ -9,6 +9,12 @@ add below to package.json
 }
 ```
 
+and run (at project root)
+
+```
+npx css-import-generator
+```
+
 ### What It does
 
 given `css-root`, it scans every scss, css, sass file and generated single file at `destination` which contains all import statements.
