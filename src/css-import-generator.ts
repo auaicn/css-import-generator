@@ -64,22 +64,33 @@ const generateImport = ({ root, currentDirectory }: { root: string; currentDirec
   const directories = dirents.filter((dirent) => dirent.isDirectory())
   const files = dirents.filter((dirent) => dirent.isFile())
 
-  // comment directory
-  if (content.length > 0) content += makeEmptyLine()
-  content += makeComment({
-    comment: `in directory ${path.relative(destinationDirectory, currentDirectory)}`,
-  })
+  let hasCssFiles = false
+  let currentDirectoryImportContent = ''
 
   // files
   files.forEach((file) => {
     const extension = file.name.split('.').pop()
 
     if (extension && extensions.has(extension)) {
-      content += makeImport({
+      hasCssFiles = true
+      currentDirectoryImportContent += makeImport({
         relativePath: path.join(path.relative(destinationDirectory, currentDirectory), file.name),
       })
     }
   })
+
+  // comment directory
+  if (currentDirectoryImportContent.length > 0 && hasCssFiles) {
+    console.log(hasCssFiles)
+    currentDirectoryImportContent =
+      makeEmptyLine() +
+      makeComment({
+        comment: `in directory ${path.relative(destinationDirectory, currentDirectory)}`,
+      }) +
+      currentDirectoryImportContent
+  }
+
+  content += currentDirectoryImportContent
 
   // call for sub-directories
   directories.forEach((directory) => {
