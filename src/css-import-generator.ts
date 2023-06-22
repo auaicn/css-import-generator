@@ -30,7 +30,8 @@ if (cssRoot === undefined) {
 
 const destination = config['destination'] ?? path.resolve(cssRoot, 'index.js')
 
-if (destination) {
+if (config['destination'] === undefined) {
+  console.log(destination)
   console.warn(
     `"destination" field is missing. It's okay but we will generate output js file at ${destination}\nyou can override this behavior by providing value for "destination" under "css-import-generator" field of "package.json"`,
   )
@@ -58,6 +59,7 @@ const makeComment = ({ comment }: { comment: string }) => {
 
 const generateImport = ({ root, currentDirectory }: { root: string; currentDirectory: string }) => {
   const dirents = readdirSync(currentDirectory, { withFileTypes: true })
+  const destinationDirectory = path.dirname(destination)
 
   const directories = dirents.filter((dirent) => dirent.isDirectory())
   const files = dirents.filter((dirent) => dirent.isFile())
@@ -65,7 +67,7 @@ const generateImport = ({ root, currentDirectory }: { root: string; currentDirec
   // comment directory
   if (content.length > 0) content += makeEmptyLine()
   content += makeComment({
-    comment: `in directory ${path.relative(destination, currentDirectory)}`,
+    comment: `in directory ${path.relative(destinationDirectory, currentDirectory)}`,
   })
 
   // files
@@ -74,7 +76,7 @@ const generateImport = ({ root, currentDirectory }: { root: string; currentDirec
 
     if (extension && extensions.has(extension)) {
       content += makeImport({
-        relativePath: path.join(path.relative(destination, currentDirectory), file.name),
+        relativePath: path.join(path.relative(destinationDirectory, currentDirectory), file.name),
       })
     }
   })
