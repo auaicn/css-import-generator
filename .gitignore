@@ -132,3 +132,5 @@ dist
 # Others
 npm_install_test/*
 .DS_Store
+
+yarn.lock
