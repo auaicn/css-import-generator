@@ -50,7 +50,7 @@ const makeEmptyLine = () => {
 }
 
 const makeImport = ({ relativePath }: { relativePath: string }) => {
-  return `import '${relativePath}'${newLine}`
+  return `import './${relativePath}'${newLine}`
 }
 
 const makeComment = ({ comment }: { comment: string }) => {

@@ -33,7 +33,7 @@ const makeEmptyLine = () => {
     return newLine;
 };
 const makeImport = ({ relativePath }) => {
-    return `import '${relativePath}'${newLine}`;
+    return `import './${relativePath}'${newLine}`;
 };
 const makeComment = ({ comment }) => {
     return `// ${comment}${newLine}`;
