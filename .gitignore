@@ -131,8 +131,9 @@ dist
 
 # Others
 npm_install_test/*
-.DS_Store
+*/.DS_Store
 
-yarn.lock
+# yarn.lock
+package-lock.json
 
 src/css-import-generator.js

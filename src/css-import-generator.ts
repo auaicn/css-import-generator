@@ -81,7 +81,6 @@ const generateImport = ({ root, currentDirectory }: { root: string; currentDirec
 
   // comment directory
   if (currentDirectoryImportContent.length > 0 && hasCssFiles) {
-    console.log(hasCssFiles)
     currentDirectoryImportContent =
       makeEmptyLine() +
       makeComment({
